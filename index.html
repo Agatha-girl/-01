@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单管理系统</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="order-container">
+            <div class="title">订单栏</div>
+            <div class="tab-wrap">
+                <div class="order-tab-title" :class="[orderName=='current-order'?'active':'']" @click="orderTabClick('current-order')">当前订单</div>
+                <div class="order-tab-title" :class="[orderName=='payed-order'?'active':'']" @click="orderTabClick('payed-order')">已付款</div>
+                <div class="order-tab-title" :class="[orderName=='gua-order'?'active':'']" @click="orderTabClick('gua-order')">挂单中</div>
+                <div class="order-tab-title" :class="[orderName=='cancel-order'?'active':'']" @click="orderTabClick('cancel-order')">取消的订单</div>
+            </div>
+
+            <component :is="orderName" :list="orderList" @add="add" @minus="minus" @delete-item="deleteItem"></component>
+        </div>
+        <div class="food-container">
+            <div class="title">产品栏</div>
+            <div class="tab-wrap">
+                <div class="food-tab-title" :class="[productName=='common-food'?'active':'']" @click="foodTabClick('common-food')">常点食品</div>
+                <div class="food-tab-title" :class="[productName=='main-menu'?'active':'']" @click="foodTabClick('main-menu')">主菜单</div>
+            </div>
+            <component :is="productName" @add-food="addFood"></component>
+        </div>
+    </div>
+</body>
+<script type="module" src="./js/index.js"></script>
+</html>
